@@ -7,15 +7,39 @@
 
 import SwiftUI
 
+
+struct LightBulbView: View {
+  
+  @Binding  var isOn: Bool
+  
+  
+  var body: some View {
+    VStack {
+      Image(systemName: isOn ? "lightbulb.fill" : "lightbulb")
+        .font(.largeTitle)
+        .foregroundStyle(isOn ? .yellow : .black)
+      Button("Toggle") {
+        isOn.toggle()
+        
+      }
+
+  }
+}
+}
+
+
+
+
 struct ContentView: View {
+  @State private  var isLightOn: Bool = false
+  
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+          LightBulbView(isOn: $isLightOn)
         }
         .padding()
+        .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, maxHeight: .infinity)
+        .background(isLightOn ? .black : .white)
     }
 }
 
